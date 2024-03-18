@@ -1,1 +1,1 @@
-sudo add-apt-repository ppa:tomtomtom/yt-dlp
+ppa:tomtomtom/yt-dlp
