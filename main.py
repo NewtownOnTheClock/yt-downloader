@@ -3,17 +3,18 @@ import subprocess
 import tempfile
 import os
 import re
+import sys
 
 tempfile.NamedTemporaryFile()
 video_path = tempfile.gettempdir() + "/"
-music_path = "~/Music/Music/yt-dlp/%(title)s.%(ext)s"
+
 
 def check_info():
     # Access the URL from session_state
     url = st.session_state.url_input
     # Make sure to handle cases where url might be empty or not valid
     if url:
-        title_print = subprocess.run(['yt-dlp', '--print', "%(title)s", url], check=True, capture_output=True, text=True)
+        title_print = subprocess.run([f'{sys.executable}', 'yt-dlp', '--print', "%(title)s", url], check=True, capture_output=True, text=True)
         title_clean = title_print.stdout.split("\n")
         title_compliled = [i for i in title_clean]
         result = subprocess.run(['yt-dlp', '-F', url], check=True, capture_output=True, text=True)
