@@ -1,1 +1,1 @@
-ppa:tomtomtom/yt-dlp
+tomtomtom/yt-dlp
