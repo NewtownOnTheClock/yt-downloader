@@ -17,7 +17,7 @@ def check_info():
         title_print = subprocess.run([f'{sys.executable}', 'yt-dlp', '--print', "%(title)s", url], check=True, capture_output=True, text=True)
         title_clean = title_print.stdout.split("\n")
         title_compliled = [i for i in title_clean]
-        result = subprocess.run(['yt-dlp', '-F', url], check=True, capture_output=True, text=True)
+        result = subprocess.run([f'{sys.executable}', 'yt-dlp', '-F', url], check=True, capture_output=True, text=True)
         lines = result.stdout.split("\n")
         pattern = re.compile(r'^(\d+)\s+(\w+)\s+(\d+x\d+|\w+)\s+(.+)$')
 
