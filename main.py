@@ -14,10 +14,10 @@ def check_info():
     url = st.session_state.url_input
     # Make sure to handle cases where url might be empty or not valid
     if url:
-        title_print = subprocess.run(['bash', 'yt-dlp', '--print', "%(title)s", url], check=True, capture_output=True, text=True)
+        title_print = subprocess.run(['sh', 'yt-dlp', '--print', "%(title)s", url], check=True, capture_output=True, text=True)
         title_clean = title_print.stdout.split("\n")
         title_compliled = [i for i in title_clean]
-        result = subprocess.run(["bash", 'yt-dlp', '-F', url], check=True, capture_output=True, text=True)
+        result = subprocess.run(["sh", 'yt-dlp', '-F', url], check=True, capture_output=True, text=True)
         lines = result.stdout.split("\n")
         pattern = re.compile(r'^(\d+)\s+(\w+)\s+(\d+x\d+|\w+)\s+(.+)$')
 
