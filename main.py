@@ -64,26 +64,27 @@ if 'downloaded_file_path' not in st.session_state:
 url_input = st.text_input("Input the URL from Youtube", value=st.session_state.url_input, placeholder="url...", key='url_input', on_change=check_info)
 col1, col2 = st.columns([0.65, 0.35])
 
-format_selected = col2.selectbox("Select the wanted format", st.session_state.data_lst)
-format_number = str(format_selected).split(":")[0]
-extension_text = str(format_selected).split(" ")[1]
+if st.session_state.data_lst:
+    format_selected = col2.selectbox("Select the wanted format", st.session_state.data_lst)
+    format_number = str(format_selected).split(":")[0]
+    extension_text = str(format_selected).split(" ")[1]
 
 
-output_name = col1.text_input("Input the desired output name", value=st.session_state.title)
+    output_name = col1.text_input("Input the desired output name", value=st.session_state.title)
 
-cola, colb, colc = st.columns([0.2, 0.6, 0.2])
+    cola, colb, colc = st.columns([0.2, 0.6, 0.2])
 
-if colb.button("Download", use_container_width=True, type="primary"):
-    try:
-        st.session_state.downloaded_file_path = download_file(format_number, output_name, extension_text)
-        with open(st.session_state.downloaded_file_path, "rb") as f:
-            file_basename = os.path.basename(st.session_state.downloaded_file_path)
-            st.download_button(label="Download File", data=f, file_name=file_basename, mime="application/octet-stream", on_click=remove_file(st.session_state.downloaded_file_path))
+    if colb.button("Download", use_container_width=True, type="primary"):
+        try:
+            st.session_state.downloaded_file_path = download_file(format_number, output_name, extension_text)
+            with open(st.session_state.downloaded_file_path, "rb") as f:
+                file_basename = os.path.basename(st.session_state.downloaded_file_path)
+                st.download_button(label="Download File", data=f, file_name=file_basename, mime="application/octet-stream", on_click=remove_file(st.session_state.downloaded_file_path))
 
 
-    except Exception as e:
-        print(e)
-        st.error("Download Failed.")
+        except Exception as e:
+            print(e)
+            st.error("Download Failed.")
 
 
 
